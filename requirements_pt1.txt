@@ -1,0 +1,13 @@
+omegaconf
+einops
+fire
+tqdm
+webdataset>=0.2.33
+--extra-index-url https://download.pytorch.org/whl/cu117
+torch==1.13.1
+torchdata==0.5.1
+torchaudio==0.13.1
+torchvision==0.14.1+cu117
+torchmetrics
+opencv-python==4.6.0.66
+-e .

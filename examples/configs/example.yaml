@@ -1,0 +1,31 @@
+dataset:
+  urls:
+    # USER: adapt this path the root of your custom dataset
+    - "/path/to/data"
+  pipeline_config:
+    shardshuffle: 10000
+    sample_shuffle: 1000 # USER: you might wanna adapt depending on your available RAM
+
+  decoders:
+    - "pil"
+
+  postprocessors:
+    - target: sdata.mappers.TorchVisionImageTransforms
+      params:
+        key: 'jpg' # USER: you might wanna adapt this for your custom dataset
+        transforms:
+          - target: torchvision.transforms.Resize
+            params:
+              size: 256
+              interpolation: 3
+          - target: torchvision.transforms.ToTensor
+    - target: sdata.mappers.Rescaler
+
+    - target: sdata.mappers.AddOriginalImageSizeAsTupleAndCropToSquare
+      params:
+        h_key: height # USER: you might wanna adapt this for your custom dataset
+        w_key: width # USER: you might wanna adapt this for your custom dataset
+
+loader:
+  batch_size: 64
+  num_workers: 6
