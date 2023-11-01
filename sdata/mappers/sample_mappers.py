@@ -152,7 +152,7 @@ class AddOriginalImageSizeAsTupleAndCropToSquare(AbstractMapper):
         if self.skip_this_sample(x):
             return x
         if self.use_data_key:
-            h, w = map(lambda y: x["json"][y], (self.h_key, self.w_key))
+            h, w = map(lambda y: x[self.data_key][y], (self.h_key, self.w_key))
         else:
             h, w = map(lambda y: x[y], (self.h_key, self.w_key))
         x["original_size_as_tuple"] = torch.tensor([h, w])
